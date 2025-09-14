@@ -10,11 +10,21 @@ Este proyecto es una pequeña aplicacion web costuida con **Laravel** y **Bootst
 
 ## Tecnologías utilizadas
 
-- [Laravel 12.28.1](https://laravel.com/)
-- [PHP 8.2.12](https://www.php.net/)
-- [MySQL](https://www.mysql.com/) como base de datos
-- [Bootstrap 5](https://getbootstrap.com/) para estilos
-- [JavaScript (Fetch API)](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) para consumo de la API
+## 🚀 Tecnologías utilizadas
+
+- [Laravel 12.28.1](https://laravel.com/)  
+- [PHP 8.2.12](https://www.php.net/)  
+- [MySQL](https://www.mysql.com/) como base de datos  
+- [Bootstrap 5](https://getbootstrap.com/) para estilos  
+- [Composer](https://getcomposer.org/) para manejar dependencias de PHP  
+- [XAMPP](https://www.apachefriends.org/index.html) como servidor local  
+- **JavaScript (Fetch API + autocompletado)** para consumo de la API y funcionalidades dinámicas en el frontend 
+
+
+
+
+# Ejecutar el siguiente comando para instalar las dependencias
+composer install
 
 # Configuracion de la base de datos en .env:
 DB_CONNECTION=mysql
@@ -33,4 +43,5 @@ acceder a la url que se indica
 
 # Ubicacion de la base de datos:
 database/gestion.sql
+**para importar la base de datos** se debe de crear en phpMyAdmin una base de datos con el nombre de **gestion** y ahi importar el archivo gestion.sql
 
