@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Models\Producto;
 use Illuminate\Http\Request;
 
 class WebhookController extends Controller
@@ -10,11 +10,11 @@ class WebhookController extends Controller
     public function descontarStock(Request $request)
     {
         $data = $request->validate([
-            'product_id' => 'required|exists:products,id',
+            'producto_id' => 'required|exists:productos,id',
             'cantidad' => 'required|integer|min:1',
         ]);
 
-        $product = Product::find($data['product_id']);
+        $product = Producto::find($data['producto_id']);
         if ($product->stock < $data['cantidad']) {
             return response()->json(['error' => 'Stock insuficiente'], 400);
         }

@@ -20,7 +20,7 @@ class ProductoController extends Controller
             'nombre' => 'required|string|max:255',
             'precio' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
-            'cliente_id' => 'required|exists:clientes,id',
+            'cliente_id' => 'exists:clientes,id',
         ]));
         return response()->json($producto, 201);
     }
@@ -39,7 +39,7 @@ class ProductoController extends Controller
             'nombre' => 'sometimes|required|string|max:255',
             'precio' => 'sometimes|required|numeric|min:0',
             'stock' => 'sometimes|required|integer|min:0',
-            'cliente_id' => 'sometimes|required|exists:clientes,id',
+            'cliente_id' => 'sometimes|exists:clientes,id',
         ]));
         return response()->json($producto, 200);
     }

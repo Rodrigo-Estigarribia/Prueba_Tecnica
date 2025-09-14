@@ -3,11 +3,11 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClienteController;
-use App\Http\Controllers\ProducteController;
+use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\WebhookController;
 
 Route::apiResource('clientes', ClienteController::class);
-Route::apiResource('productes', ProducteController::class);
+Route::apiResource('productos', ProductoController::class);
 
 Route::post('/webhook/stock', [WebhookController::class, 'descontarStock']);
 
