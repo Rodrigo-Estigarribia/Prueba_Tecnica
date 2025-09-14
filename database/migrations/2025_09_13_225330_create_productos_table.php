@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('nombre');
             $table->decimal('precio', 10, 2);
             $table->integer('stock');
-            $table->foreignId('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
             $table->timestamps();
         });
     }

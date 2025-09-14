@@ -40,12 +40,13 @@ let clientes = [];
 let productos = [];
 let compra = [];
 let clienteSeleccionado = null;
+let url = "http://localhost:8000";
 
 // Cargar clientes y productos al inicio
 async function cargarDatos() {
-    let resClientes = await fetch('http://localhost:8000/api/clientes');
+    let resClientes = await fetch(`${url}/api/clientes`);
     clientes = await resClientes.json();
-    let resProductos = await fetch('http://localhost:8000/api/productos');
+    let resProductos = await fetch(`${url}/api/productos`);
     productos = await resProductos.json();
 }
 
@@ -107,7 +108,7 @@ function renderTabla() {
                 <td>${p.nombre}</td>
                 <td id="stock-${p.id}">${p.stock}</td>
                 <td><input type="number" min="1" max="${p.stock}" value="${p.cantidad}" class="form-control" style="width:100px;" onchange="updateCantidad(${p.id}, this.value)"></td>
-                <td><button class="btn btn-danger btn-sm" onclick="quitarProducto(${p.id})">Quitar</button></td>
+                <td><button class="btn btn-danger btn-sm" onclick="quitarProducto(${p.id})">🗑</button></td>
             </tr>
         `;
     });
@@ -133,7 +134,7 @@ async function finalizarCompra() {
     mensajeDiv.innerHTML = '';
 
     for(let p of compra) {
-        let res = await fetch('http://localhost:8000/api/webhook/stock', {
+        let res = await fetch(`${url}/api/webhook/stock`, {
             method: 'POST',
             headers: {"Content-Type":"application/json"},
             body: JSON.stringify({ producto_id: p.id, cantidad: p.cantidad })
@@ -142,6 +143,18 @@ async function finalizarCompra() {
         if(res.ok) {
             let data = await res.json();
             document.getElementById(`stock-${p.id}`).innerText = data.stock;
+
+            // Registrar en historial
+            await fetch('/api/historial', {
+            method: 'POST',
+            headers: {"Content-Type":"application/json"},
+            body: JSON.stringify({
+                cliente_id: clienteSeleccionado.id,
+                producto_id: p.id,
+                cantidad: p.cantidad
+            })
+        });
+
         } else {
             let error = await res.json();
             mensajeDiv.innerHTML += `<div class="alert alert-danger">${error.error}</div>`;

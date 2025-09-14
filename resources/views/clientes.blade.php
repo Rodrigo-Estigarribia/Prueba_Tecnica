@@ -5,7 +5,7 @@
 @section('content')
 <h1 class="mb-4">Clientes</h1>
 
-<!-- Formulario -->
+<!-- Formulario para nuevo cliente -->
 <div class="card mb-4">
     <div class="card-header bg-primary text-white" id="form-header">Nuevo Cliente</div>
     <div class="card-body">
@@ -16,14 +16,14 @@
                 <div class="col-md-4"><input type="email" id="email" class="form-control" placeholder="Email" required></div>
                 <div class="col-md-3"><input type="text" id="telefono" class="form-control" placeholder="Teléfono"></div>
                 <div class="col-md-1">
-                    <button type="submit" class="btn btn-success w-100" id="submitBtn">+</button>
+                    <button type="submit" class="btn btn-success w-100" id="submitBtn">💾</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
 
-<!-- Tabla -->
+<!-- Tabla de Clientes -->
 <div class="card">
     <div class="card-header bg-dark text-white">Lista de Clientes</div>
     <div class="card-body p-0">
@@ -40,9 +40,10 @@
 @section('scripts')
 <script>
 let editMode = false;
+let url = "http://localhost:8000";
 
 async function cargarClientes() {
-    let res = await fetch("/api/clientes");
+    let res = await fetch("http://localhost:8000/api/clientes");
     let clientes = await res.json();
     let tbody = document.getElementById("clientes-body");
     tbody.innerHTML = "";
@@ -54,8 +55,8 @@ async function cargarClientes() {
                 <td>${c.email}</td>
                 <td>${c.telefono}</td>
                 <td>
-                    <button class="btn btn-warning btn-sm me-1" onclick="editarCliente(${c.id})">Editar</button>
-                    <button class="btn btn-danger btn-sm" onclick="eliminarCliente(${c.id})">Eliminar</button>
+                    <button class="btn btn-warning btn-sm me-1" onclick="editarCliente(${c.id})">🖊</button>
+                    <button class="btn btn-danger btn-sm" onclick="eliminarCliente(${c.id})">🗑</button>
                 </td>
             </tr>
         `;
@@ -70,17 +71,17 @@ async function enviarCliente() {
 
     if (editMode) {
         // Editar
-        await fetch(`/api/clientes/${id}`, {
+        await fetch(`${url}/api/clientes/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ nombre, email, telefono })
         });
         editMode = false;
         document.getElementById("form-header").innerText = "Nuevo Cliente";
-        document.getElementById("submitBtn").innerText = "+";
+        document.getElementById("submitBtn").innerText = "Guardar";
     } else {
         // Crear
-        await fetch("/api/clientes", {
+        await fetch(`${url}/api/clientes`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ nombre, email, telefono })
@@ -92,7 +93,7 @@ async function enviarCliente() {
 }
 
 async function editarCliente(id) {
-    let res = await fetch(`/api/clientes/${id}`);
+    let res = await fetch(`${url}/api/clientes/${id}`);
     let c = await res.json();
     document.getElementById("cliente_id").value = c.id;
     document.getElementById("nombre").value = c.nombre;
@@ -100,11 +101,11 @@ async function editarCliente(id) {
     document.getElementById("telefono").value = c.telefono;
     editMode = true;
     document.getElementById("form-header").innerText = "Editar Cliente";
-    document.getElementById("submitBtn").innerText = "Guardar";
+    document.getElementById("submitBtn").innerText = "✔";
 }
 
 async function eliminarCliente(id) {
-    await fetch(`/api/clientes/${id}`, { method: "DELETE" });
+    await fetch(`${url}/api/clientes/${id}`, { method: "DELETE" });
     cargarClientes();
 }
 

@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>@yield('title')</title>
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     @yield('head')
 </head>
@@ -17,6 +16,7 @@
                     <li class="nav-item"><a class="nav-link" href="/clientes">Clientes</a></li>
                     <li class="nav-item"><a class="nav-link" href="/productos">Productos</a></li>
                     <li class="nav-item"><a class="nav-link" href="/compra">Compra</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/historial">Historial</a></li>
 
                 </ul>
             </div>
@@ -27,7 +27,6 @@
         @yield('content')
     </div>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     @yield('scripts')
 </body>

@@ -15,7 +15,6 @@ class Producto extends Model
         'nombre',
         'precio',
         'stock',
-        'cliente_id',
     ];
 
     public function cliente()
