@@ -20,9 +20,6 @@ Este proyecto es una pequeña aplicacion web costuida con **Laravel** y **Bootst
 - [XAMPP](https://www.apachefriends.org/index.html) como servidor local  
 - **JavaScript (Fetch API + autocompletado)** para consumo de la API y funcionalidades dinámicas en el frontend 
 
-
-
-
 # Ejecutar el siguiente comando para instalar las dependencias
 composer install
 
@@ -33,6 +30,8 @@ DB_PORT=3306
 DB_DATABASE=gestion
 DB_USERNAME=
 DB_PASSWORD=
+**tener en cuenta** en el archivo **.env.example** borrar el example que quede tal que asi **.env** seguido ejecutar el siguiente comando **php artisan key:generate** para generar la clave de laravel
+
 
 # Ejecutar el siguiente comando para migraciones:
 php artisan migrate --seed
